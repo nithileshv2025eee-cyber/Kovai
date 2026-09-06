@@ -555,6 +555,178 @@
       border: none;
     }
 
+    /* =========================================
+    CUSTOMER REVIEWS & RATINGS
+========================================= */
+
+.reviews-section {
+  width: 100%;
+  padding: 60px 0 90px;
+  text-align: center;
+  /* Centers the section nicely on the screen when scrolling/navigating */
+  scroll-margin-top: 100px; 
+}
+
+/* Section heading */
+.reviews-section .section-header {
+  margin-bottom: 35px;
+}
+
+.reviews-section .section-title {
+  margin-bottom: 10px;
+}
+
+.reviews-section .section-subtitle {
+  max-width: 550px;
+  margin: 0 auto;
+}
+
+
+/* Main Rating Card */
+.review-form-card {
+  width: calc(100% - 40px);
+  max-width: 620px;
+  margin: 0 auto;
+
+  background: var(--bg-card);
+  padding: 45px 45px 40px;
+
+  border-radius: 24px;
+  border: 1px solid var(--border-light);
+
+  box-shadow:
+    0 15px 40px rgba(61, 35, 20, 0.08);
+
+  text-align: center;
+}
+
+
+/* Star Rating */
+.rating-stars {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  gap: 8px;
+  margin: 5px auto 10px;
+}
+
+.rating-stars button {
+  width: 48px;
+  height: 48px;
+
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  color: #D8D0C8;
+
+  font-size: 38px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.rating-stars button:hover {
+  transform: scale(1.15);
+}
+
+.rating-stars button.selected {
+  color: var(--gold-accent);
+}
+
+
+/* Rating text */
+.rating-text {
+  margin: 5px 0 28px;
+
+  color: var(--text-muted);
+
+  font-size: 14px;
+  font-weight: 500;
+
+  text-align: center;
+}
+
+
+/* Name + Comment fields */
+.review-input {
+  display: block;
+
+  width: 100%;
+
+  padding: 14px 16px;
+  margin: 0 auto 15px;
+
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+
+  background: var(--bg-warm);
+
+  color: var(--text-dark);
+
+  font-family: var(--font-body);
+  font-size: 14px;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.review-input:focus {
+  border-color: var(--gold-accent);
+
+  box-shadow:
+    0 0 0 3px rgba(197, 160, 89, 0.12);
+}
+
+.review-input::placeholder {
+  color: #9A8D85;
+}
+
+
+/* Comment box */
+.review-textarea {
+  min-height: 130px;
+
+  resize: vertical;
+}
+
+
+/* Submit button */
+.review-submit {
+  width: 100%;
+
+  margin-top: 5px;
+
+  min-height: 48px;
+
+  border: none;
+}
+
+
+/* Success / Error message */
+.review-status {
+  margin-top: 18px;
+
+  min-height: 20px;
+
+  text-align: center;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  line-height: 1.5;
+}
+
+
     /* Footer */
     footer {
       border-top: 1px solid var(--border-light);
@@ -683,6 +855,49 @@
         display: none;
       }
     }
+
+    @media (max-width: 600px) {
+      .reviews-section {
+        padding: 20px 0 70px;
+      }
+
+      .review-form-card {
+        width: calc(100% - 30px);
+        padding: 30px 20px;
+        border-radius: 20px;
+      }
+
+      .rating-stars {
+        gap: 4px;
+      }
+
+      .rating-stars button {
+        width: 42px;
+        height: 42px;
+        font-size: 32px;
+      }
+
+      .rating-text {
+        margin-bottom: 22px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .review-form-card {
+        width: calc(100% - 20px);
+        padding: 25px 15px;
+      }
+
+      .rating-stars {
+        gap: 2px;
+      }
+
+      .rating-stars button {
+        width: 38px;
+        height: 38px;
+        font-size: 29px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -697,6 +912,7 @@
           <li><a href="#our-cakes">Our Cakes</a></li>
           <li><a href="#gallery">Gallery</a></li>
           <li><a href="#about">About</a></li>
+          <li><a href="#reviews">Rate Us</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
 
@@ -835,6 +1051,55 @@
       </div>
     </section>
 
+    <!-- CUSTOMER REVIEWS & RATINGS -->
+    <section id="reviews" class="reviews-section">
+      <div class="section-header">
+        <h2 class="section-title">Share Your Experience</h2>
+        <p class="section-subtitle">
+          Loved your cake? We'd love to hear from you.
+        </p>
+      </div>
+
+      <div class="review-form-card">
+        <div class="rating-stars" id="ratingStars">
+          <button type="button" data-rating="1">★</button>
+          <button type="button" data-rating="2">★</button>
+          <button type="button" data-rating="3">★</button>
+          <button type="button" data-rating="4">★</button>
+          <button type="button" data-rating="5">★</button>
+        </div>
+
+        <p id="ratingText" class="rating-text">
+          Select your rating
+        </p>
+
+        <input
+          type="text"
+          id="reviewName"
+          class="review-input"
+          placeholder="Your name"
+          maxlength="50"
+        >
+
+        <textarea
+          id="reviewComment"
+          class="review-input review-textarea"
+          placeholder="Write your experience..."
+          maxlength="500"
+        ></textarea>
+
+        <button
+          type="button"
+          id="submitReview"
+          class="btn btn-brown review-submit"
+        >
+          Submit Review
+        </button>
+
+        <div id="reviewStatus" class="review-status"></div>
+      </div>
+    </section>
+
     <section id="contact" class="visit-card">
       <div class="visit-info">
         <h2>Visit Our Boutique</h2>
@@ -891,6 +1156,7 @@
           <li><a href="#our-cakes">Our Cakes</a></li>
           <li><a href="#gallery">Gallery</a></li>
           <li><a href="#about">About</a></li>
+          <li><a href="#reviews">Reviews</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="https://wa.me/919755432987" target="_blank">WhatsApp Us</a></li>
         </ul>
@@ -979,6 +1245,126 @@
             }
           }
         });
+      });
+
+      // ================================
+      // CUSTOMER RATING & REVIEW SYSTEM
+      // ================================
+
+      let selectedRating = 0;
+
+      const ratingStars = document.querySelectorAll('#ratingStars button');
+      const ratingText = document.getElementById('ratingText');
+      const reviewName = document.getElementById('reviewName');
+      const reviewComment = document.getElementById('reviewComment');
+      const submitReview = document.getElementById('submitReview');
+      const reviewStatus = document.getElementById('reviewStatus');
+
+      const ratingMessages = {
+        1: 'Poor',
+        2: 'Not great',
+        3: 'Good',
+        4: 'Very good',
+        5: 'Excellent!'
+      };
+
+      // Select rating
+      ratingStars.forEach(star => {
+        star.addEventListener('click', () => {
+          selectedRating = Number(star.dataset.rating);
+
+          ratingStars.forEach(s => {
+            const starRating = Number(s.dataset.rating);
+
+            if (starRating <= selectedRating) {
+              s.classList.add('selected');
+            } else {
+              s.classList.remove('selected');
+            }
+          });
+
+          ratingText.textContent =
+            `${selectedRating}/5 — ${ratingMessages[selectedRating]}`;
+        });
+      });
+
+      // Submit review
+      submitReview.addEventListener('click', async () => {
+        const name = reviewName.value.trim();
+        const comment = reviewComment.value.trim();
+
+        // Validation
+        if (selectedRating === 0) {
+          reviewStatus.style.color = '#8C4A4D';
+          reviewStatus.textContent = 'Please select a rating.';
+          return;
+        }
+
+        if (!name) {
+          reviewStatus.style.color = '#8C4A4D';
+          reviewStatus.textContent = 'Please enter your name.';
+          reviewName.focus();
+          return;
+        }
+
+        if (!comment) {
+          reviewStatus.style.color = '#8C4A4D';
+          reviewStatus.textContent = 'Please write a short review.';
+          reviewComment.focus();
+          return;
+        }
+
+        // Disable button while submitting
+        submitReview.disabled = true;
+        submitReview.textContent = 'Submitting...';
+
+        reviewStatus.style.color = 'var(--text-muted)';
+        reviewStatus.textContent = 'Submitting your review...';
+
+        // Insert review into Supabase
+        const { error } = await supabaseClient
+          .from('reviews')
+          .insert([
+            {
+              name: name,
+              rating: selectedRating,
+              comment: comment
+            }
+          ]);
+
+        if (error) {
+          console.error(error);
+
+          reviewStatus.style.color = '#8C4A4D';
+          reviewStatus.textContent =
+            'Something went wrong. Please try again.';
+
+          submitReview.disabled = false;
+          submitReview.textContent = 'Submit Review';
+
+          return;
+        }
+
+        // Success message
+        reviewStatus.style.color = '#075E54';
+        reviewStatus.innerHTML =
+          '✓ Thank you for rating Kovai Cakes!<br>' +
+          'We truly appreciate your feedback. ❤️';
+
+        // Clear form
+        reviewName.value = '';
+        reviewComment.value = '';
+
+        selectedRating = 0;
+
+        ratingStars.forEach(star => {
+          star.classList.remove('selected');
+        });
+
+        ratingText.textContent = 'Select your rating';
+
+        submitReview.disabled = false;
+        submitReview.textContent = 'Submit Review';
       });
 
       // Active Section Navigation Highlighter
