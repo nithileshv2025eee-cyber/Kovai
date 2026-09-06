@@ -8,6 +8,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+  <!-- Include EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+     (function(){
+        emailjs.init({
+          publicKey: "VQYLa6lFSjfTKdHPN", // Replace with your EmailJS Public Key
+        });
+     })();
+  </script>
+
   <style>
     :root {
       --bg-warm: #FAF6F0;
@@ -563,11 +573,9 @@
   width: 100%;
   padding: 60px 0 90px;
   text-align: center;
-  /* Centers the section nicely on the screen when scrolling/navigating */
   scroll-margin-top: 100px; 
 }
 
-/* Section heading */
 .reviews-section .section-header {
   margin-bottom: 35px;
 }
@@ -581,32 +589,22 @@
   margin: 0 auto;
 }
 
-
-/* Main Rating Card */
 .review-form-card {
   width: calc(100% - 40px);
   max-width: 620px;
   margin: 0 auto;
-
   background: var(--bg-card);
   padding: 45px 45px 40px;
-
   border-radius: 24px;
   border: 1px solid var(--border-light);
-
-  box-shadow:
-    0 15px 40px rgba(61, 35, 20, 0.08);
-
+  box-shadow: 0 15px 40px rgba(61, 35, 20, 0.08);
   text-align: center;
 }
 
-
-/* Star Rating */
 .rating-stars {
   display: flex;
   justify-content: center;
   align-items: center;
-
   gap: 8px;
   margin: 5px auto 10px;
 }
@@ -614,22 +612,14 @@
 .rating-stars button {
   width: 48px;
   height: 48px;
-
   padding: 0;
-
   border: none;
   background: transparent;
-
   color: #D8D0C8;
-
   font-size: 38px;
   line-height: 1;
-
   cursor: pointer;
-
-  transition:
-    color 0.2s ease,
-    transform 0.2s ease;
+  transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .rating-stars button:hover {
@@ -640,92 +630,83 @@
   color: var(--gold-accent);
 }
 
-
-/* Rating text */
 .rating-text {
   margin: 5px 0 28px;
-
   color: var(--text-muted);
-
   font-size: 14px;
   font-weight: 500;
-
   text-align: center;
 }
 
-
-/* Name + Comment fields */
 .review-input {
   display: block;
-
   width: 100%;
-
   padding: 14px 16px;
   margin: 0 auto 15px;
-
   border: 1px solid var(--border-light);
   border-radius: 12px;
-
   background: var(--bg-warm);
-
   color: var(--text-dark);
-
   font-family: var(--font-body);
   font-size: 14px;
-
   outline: none;
-
-  transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .review-input:focus {
   border-color: var(--gold-accent);
-
-  box-shadow:
-    0 0 0 3px rgba(197, 160, 89, 0.12);
+  box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.12);
 }
 
 .review-input::placeholder {
   color: #9A8D85;
 }
 
-
-/* Comment box */
 .review-textarea {
   min-height: 130px;
-
   resize: vertical;
 }
 
-
-/* Submit button */
 .review-submit {
   width: 100%;
-
   margin-top: 5px;
-
   min-height: 48px;
-
   border: none;
 }
 
-
-/* Success / Error message */
-.review-status {
-  margin-top: 18px;
-
-  min-height: 20px;
-
-  text-align: center;
-
+/* View All Reviews Button Styling */
+.view-reviews-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 15px;
+  padding: 12px 24px;
+  background: transparent;
+  color: var(--primary-brown);
+  border: 1px solid var(--border-light);
+  border-radius: 50px;
   font-size: 14px;
-  font-weight: 500;
-
-  line-height: 1.5;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.25s ease;
+  width: 100%;
 }
 
+.view-reviews-btn:hover {
+  background-color: var(--primary-brown);
+  color: #FFFFFF;
+  border-color: var(--primary-brown);
+}
+
+.review-status {
+  margin-top: 18px;
+  min-height: 20px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+}
 
     /* Footer */
     footer {
@@ -912,7 +893,7 @@
           <li><a href="#our-cakes">Our Cakes</a></li>
           <li><a href="#gallery">Gallery</a></li>
           <li><a href="#about">About</a></li>
-          <li><a href="#reviews">Rate Us</a></li>
+          <li><a href="#reviews">Reviews</a></li>
           <li><a href="#contact">Contact</a></li>
         </ul>
 
@@ -1081,6 +1062,14 @@
           maxlength="50"
         >
 
+        <input
+          type="email"
+          id="reviewEmail"
+          class="review-input"
+          placeholder="Your email address"
+          maxlength="100"
+        >
+
         <textarea
           id="reviewComment"
           class="review-input review-textarea"
@@ -1095,6 +1084,12 @@
         >
           Submit Review
         </button>
+
+        <!-- Button to jump to the second page (reviews.html) -->
+        <a href="reviews.html" class="view-reviews-btn">
+          <span>View All Customer Reviews</span>
+          <span>→</span>
+        </a>
 
         <div id="reviewStatus" class="review-status"></div>
       </div>
@@ -1169,13 +1164,11 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script>
-    // REPLACE WITH YOUR ACTUAL SUPABASE CREDENTIALS
     const SUPABASE_URL = 'https://eixrdmbtxitggosgrwpy.supabase.co';
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVpeHJkbWJ0eGl0Z2dvc2dyd3B5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg2OTE4NjMsImV4cCI6MjEwNDI2Nzg2M30._pdp2hDX10uWbret3SAZOEOOxopkCI__5GQChFgt37E';
 
-    const supabaseClient = window.supabase.createClient('https://eixrdmbtxitggosgrwpy.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVpeHJkbWJ0eGl0Z2dvc2dyd3B5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg2OTE4NjMsImV4cCI6MjEwNDI2Nzg2M30._pdp2hDX10uWbret3SAZOEOOxopkCI__5GQChFgt37E');
+    const supabaseClient = window.supabase.createClient('https://eixrdmbtxitggosgrwpy.supabase.co',  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVpeHJkbWJ0eGl0Z2dvc2dyd3B5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODg2OTE4NjMsImV4cCI6MjEwNDI2Nzg2M30._pdp2hDX10uWbret3SAZOEOOxopkCI__5GQChFgt37E');
 
-    // Fetch and display gallery photos from Supabase
     async function loadGalleryImages() {
       const grid = document.getElementById('dynamicGalleryGrid');
       
@@ -1190,7 +1183,7 @@
       }
 
       if (data && data.length > 0) {
-        grid.innerHTML = ''; // Clear fallback placeholders if any
+        grid.innerHTML = '';
         data.forEach(item => {
           const card = document.createElement('div');
           card.className = 'gallery-card-wrapper';
@@ -1209,19 +1202,16 @@
       const smoothScrollLinks = document.querySelectorAll('a[href^="#"]');
       const sections = document.querySelectorAll('section[id]');
 
-      // Toggle Hamburger Menu
       menuToggle.addEventListener('click', () => {
         navLinksContainer.classList.toggle('nav-open');
       });
 
-      // Close menu when a link is tapped
       navLinks.forEach(link => {
         link.addEventListener('click', () => {
           navLinksContainer.classList.remove('nav-open');
         });
       });
 
-      // Smooth Offset Scrolling for fixed header
       smoothScrollLinks.forEach(link => {
         link.addEventListener('click', function (e) {
           const targetId = this.getAttribute('href');
@@ -1247,15 +1237,12 @@
         });
       });
 
-      // ================================
-      // CUSTOMER RATING & REVIEW SYSTEM
-      // ================================
-
       let selectedRating = 0;
 
       const ratingStars = document.querySelectorAll('#ratingStars button');
       const ratingText = document.getElementById('ratingText');
       const reviewName = document.getElementById('reviewName');
+      const reviewEmail = document.getElementById('reviewEmail');
       const reviewComment = document.getElementById('reviewComment');
       const submitReview = document.getElementById('submitReview');
       const reviewStatus = document.getElementById('reviewStatus');
@@ -1268,7 +1255,6 @@
         5: 'Excellent!'
       };
 
-      // Select rating
       ratingStars.forEach(star => {
         star.addEventListener('click', () => {
           selectedRating = Number(star.dataset.rating);
@@ -1283,17 +1269,15 @@
             }
           });
 
-          ratingText.textContent =
-            `${selectedRating}/5 — ${ratingMessages[selectedRating]}`;
+          ratingText.textContent = `${selectedRating}/5 — ${ratingMessages[selectedRating]}`;
         });
       });
 
-      // Submit review
       submitReview.addEventListener('click', async () => {
         const name = reviewName.value.trim();
+        const email = reviewEmail.value.trim();
         const comment = reviewComment.value.trim();
 
-        // Validation
         if (selectedRating === 0) {
           reviewStatus.style.color = '#8C4A4D';
           reviewStatus.textContent = 'Please select a rating.';
@@ -1307,6 +1291,13 @@
           return;
         }
 
+        if (!email || !email.includes('@')) {
+          reviewStatus.style.color = '#8C4A4D';
+          reviewStatus.textContent = 'Please enter a valid email address.';
+          reviewEmail.focus();
+          return;
+        }
+
         if (!comment) {
           reviewStatus.style.color = '#8C4A4D';
           reviewStatus.textContent = 'Please write a short review.';
@@ -1314,14 +1305,13 @@
           return;
         }
 
-        // Disable button while submitting
         submitReview.disabled = true;
         submitReview.textContent = 'Submitting...';
 
         reviewStatus.style.color = 'var(--text-muted)';
         reviewStatus.textContent = 'Submitting your review...';
 
-        // Insert review into Supabase
+        // Insert review into Supabase table
         const { error } = await supabaseClient
           .from('reviews')
           .insert([
@@ -1334,27 +1324,30 @@
 
         if (error) {
           console.error(error);
-
           reviewStatus.style.color = '#8C4A4D';
-          reviewStatus.textContent =
-            'Something went wrong. Please try again.';
-
+          reviewStatus.textContent = 'Something went wrong. Please try again.';
           submitReview.disabled = false;
           submitReview.textContent = 'Submit Review';
-
           return;
         }
 
-        // Success message
+        // Send automated thank you email via EmailJS
+        // (Make sure to replace YOUR_SERVICE_ID and YOUR_TEMPLATE_ID with your actual EmailJS credentials)
+        emailjs.send("service_gwekyjd", "template_qgs5gw7", {
+          to_name: name,
+          to_email: email,
+          rating: selectedRating,
+          message: comment
+        }).catch(err => {
+          console.error('Email sending failed:', err);
+        });
+
         reviewStatus.style.color = '#075E54';
-        reviewStatus.innerHTML =
-          '✓ Thank you for rating Kovai Cakes!<br>' +
-          'We truly appreciate your feedback. ❤️';
+        reviewStatus.innerHTML = '✓ Thank you for rating Kovai Cakes!<br>A thank-you email has been sent to your inbox. ❤️';
 
-        // Clear form
         reviewName.value = '';
+        reviewEmail.value = '';
         reviewComment.value = '';
-
         selectedRating = 0;
 
         ratingStars.forEach(star => {
@@ -1362,12 +1355,10 @@
         });
 
         ratingText.textContent = 'Select your rating';
-
         submitReview.disabled = false;
         submitReview.textContent = 'Submit Review';
       });
 
-      // Active Section Navigation Highlighter
       window.addEventListener('scroll', () => {
         let currentSection = '';
         const scrollPosition = window.scrollY + 120;
